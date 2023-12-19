@@ -7,6 +7,11 @@ export default {
     './containers/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    borderRadius: {
+      sm: '0.5rem',
+      DEFAULT: '1rem',
+      md: '2rem',
+    },
     fontSize: {
       sm: '0.875rem',
       base: '1rem',

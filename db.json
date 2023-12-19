@@ -2,17 +2,17 @@
   "projects": [
     {
       "id": 1,
-      "nom": " projet 1",
+      "nom": "Nom du projet",
       "description": "description 1",
-      "commentaire": " ceci est un commentaire 1 de test",
+      "commentaire": "Premier commentaire",
       "etape": "En attente"
     },
     {
       "id": 2,
-      "nom": " projet 2",
+      "nom": "Projet delta",
       "description": "description 2",
-      "commentaire": " ceci est un commentaire 2 de test",
-      "etape": "En cours"
+      "commentaire": "Deuxième commentaire",
+      "etape": "Terminé"
     },
     {
       "id": 3,
@@ -76,13 +76,6 @@
       "description": "description 11",
       "commentaire": " ceci est un commentaire 11 de test",
       "etape": "En cours"
-    },
-    {
-      "id": 12,
-      "nom": " projet 12",
-      "description": "description 12",
-      "commentaire": " ceci est un commentaire 12 de test",
-      "etape": "Terminé"
     }
   ]
 }
