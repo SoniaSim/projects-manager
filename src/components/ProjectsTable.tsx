@@ -16,7 +16,7 @@ const columns = [
   columnHelper.accessor(row => row.id, {
     id: 'id',
     header: 'Id',
-    cell: info => <EditableCell {...info} />,
+    cell: info => <div className="font-bold">{info.getValue()}</div>,
   }),
   columnHelper.accessor(row => row.nom, {
     id: 'nom',

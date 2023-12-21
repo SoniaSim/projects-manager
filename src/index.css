@@ -51,15 +51,13 @@ button {
 button:hover {
   border-color: var(--ui-border);
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
 
 input {
   background-color: var(--ui-background);
   width: 100%;
+  padding: 4px;
 }
+
 
 table *:not(input, svg, div) {
   border: 1px solid white;

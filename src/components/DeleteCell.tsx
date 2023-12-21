@@ -6,7 +6,7 @@ const DeleteCell = ({ row, table }: any) => {
       <AiOutlineDelete
         size={22}
         color="#f97453"
-        onClick={() => table.options.meta?.deleteProject(row.index)}
+        onClick={() => table.options.meta?.deleteData(row.index)}
       />
     </div>
   );

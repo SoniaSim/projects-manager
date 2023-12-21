@@ -11,7 +11,6 @@ const EditableCell = ({ getValue, row, column, table }: any) => {
     <input
       defaultValue={initialValue}
       onChange={e => debounced(e.target.value)}
-      disabled={column.id === 'id'}
     />
   );
 };
