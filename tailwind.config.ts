@@ -26,7 +26,7 @@ export default {
       text: 'var(--colors-text)',
       border: 'var(--colors-border)',
       background: 'var(--colors-background)',
-      ' btn-background': 'var(--colors-btn-background)',
+      'btn-background': 'var(--colors-btn-background)',
     },
     extend: {},
   },

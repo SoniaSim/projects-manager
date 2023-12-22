@@ -20,3 +20,8 @@ export const DELETE_PROJECT = async (projectId: number) => {
   const { data } = await axios.delete(`${baseURL}/projects/${projectId}`);
   return data;
 };
+
+export const CREATE_PROJECT = async (newProject: Project) => {
+  const { data } = await axios.post(`${baseURL}/projects`, newProject);
+  return data;
+};

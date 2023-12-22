@@ -75,14 +75,14 @@ const ProjectTable = ({ projects }: { projects?: Project[] }) => {
     columns,
     getCoreRowModel: getCoreRowModel(),
     meta: {
-      updateData: (rowIndex: number, columnId: string, value: string) =>
+      updateData: (projectId: number, columnId: string, value: string) =>
         updateProject({
-          projectId: rowIndex + 1,
+          projectId: projectId,
           infos: { [columnId]: value },
         }),
-      deleteData: (rowIndex: number) =>
+      deleteData: (projectId: number) =>
         deleteProject({
-          projectId: rowIndex + 1,
+          projectId,
         }),
     },
   });

@@ -52,12 +52,15 @@ button:hover {
   border-color: var(--ui-border);
 }
 
-input {
+input, textarea {
   background-color: var(--ui-background);
   width: 100%;
   padding: 4px;
 }
 
+input:focus, input:valid {
+  background-color: inherit;
+}
 
 table *:not(input, svg, div) {
   border: 1px solid white;
