@@ -28,6 +28,7 @@ export default {
       border: 'var(--colors-border)',
       background: 'var(--colors-background)',
       'btn-background': 'var(--colors-btn-background)',
+      danger: 'var(--colors-danger)',
     },
     extend: {},
   },

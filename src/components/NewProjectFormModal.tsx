@@ -1,7 +1,6 @@
 import Modal from 'react-modal';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
-import TextField from './TextField';
-import TextAreaField from './TextareaField';
+import { TextField, TextareaField } from './Fields';
 import { useMutation, useQueryClient } from 'react-query';
 import { CREATE_PROJECT } from 'api/projects';
 
@@ -57,6 +56,7 @@ const NewProjectFormModal: React.FC<ModalComponentProps> = ({
   const onSubmit: SubmitHandler<Inputs> = data => {
     createProject({ ...data, id: ((maxNumberId && maxNumberId) || 0) + 1 });
     onRequestClose();
+    methods.reset();
   };
 
   return (
@@ -68,8 +68,8 @@ const NewProjectFormModal: React.FC<ModalComponentProps> = ({
           className="flex flex-col gap-6"
         >
           <TextField name="nom" label="Nom du projet" />
-          <TextAreaField name="description" label="Description du projet" />
-          <TextAreaField name="commentaire" label="Commentaire" />
+          <TextareaField name="description" label="Description du projet" />
+          <TextareaField name="commentaire" label="Commentaire" />
           <TextField name="etape" label="Étape" />
           <div className="flex justify-end">
             <button type="submit" className="w-32 bg-btn-background">

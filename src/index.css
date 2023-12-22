@@ -10,12 +10,14 @@
   --colors-border: #fef6e7;
   --colors-background: #242424;
   --colors-btn-background: #1a1a1a;
+  --colors-danger: #f97453;
 
   --ui-text: var(--colors-text);
   --ui-text-secondary: var(--colors-text-secondary);
   --ui-border: var(--colors-border);
   --ui-background: var(--colors-background);
   --ui-btn-background: var(--colors-btn-background);
+  --ui-danger: var(--colors-danger);
 }
 
 body {

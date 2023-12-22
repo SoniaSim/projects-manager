@@ -5,11 +5,9 @@ import {
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import EditableCell from './EditableCell';
 import { useMutation, useQueryClient } from 'react-query';
 import { UPDATE_PROJECT, DELETE_PROJECT } from 'api/projects';
-import DeleteCell from './DeleteCell';
-import ShowDetailsCell from './ShowDetailsCell';
+import { EditableCell, DeleteCell, ShowDetailsCell } from './Cell';
 
 const columnHelper = createColumnHelper<Project>();
 

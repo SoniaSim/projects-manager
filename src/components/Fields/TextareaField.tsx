@@ -1,6 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 
-const TextAreaField = ({ name, label }: { name: string; label: string }) => {
+const TextareaField = ({ name, label }: { name: string; label: string }) => {
   const {
     register,
     formState: { errors },
@@ -23,4 +23,4 @@ const TextAreaField = ({ name, label }: { name: string; label: string }) => {
   );
 };
 
-export default TextAreaField;
+export default TextareaField;
