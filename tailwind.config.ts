@@ -24,6 +24,7 @@ export default {
     },
     colors: {
       text: 'var(--colors-text)',
+      'text-secondary': 'var(--colors-text-secondary)',
       border: 'var(--colors-border)',
       background: 'var(--colors-background)',
       'btn-background': 'var(--colors-btn-background)',

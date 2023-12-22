@@ -25,3 +25,8 @@ export const CREATE_PROJECT = async (newProject: Project) => {
   const { data } = await axios.post(`${baseURL}/projects`, newProject);
   return data;
 };
+
+export const GET_PROJECT = async (projectId: number) => {
+  const response = await axios.get(`${baseURL}/projects/${projectId}`);
+  return response.data;
+};

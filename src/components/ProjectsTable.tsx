@@ -9,6 +9,7 @@ import EditableCell from './EditableCell';
 import { useMutation, useQueryClient } from 'react-query';
 import { UPDATE_PROJECT, DELETE_PROJECT } from 'api/projects';
 import DeleteCell from './DeleteCell';
+import ShowDetailsCell from './ShowDetailsCell';
 
 const columnHelper = createColumnHelper<Project>();
 
@@ -38,8 +39,13 @@ const columns = [
     header: 'Etape',
     cell: info => <EditableCell {...info} />,
   }),
-  columnHelper.accessor('action', {
-    id: 'action',
+  columnHelper.accessor('showAction', {
+    id: 'showAction',
+    header: '',
+    cell: info => <ShowDetailsCell {...info} />,
+  }),
+  columnHelper.accessor('deleteAction', {
+    id: 'deleteAction',
     header: '',
     cell: info => <DeleteCell {...info} />,
   }),
@@ -94,7 +100,10 @@ const ProjectTable = ({ projects }: { projects?: Project[] }) => {
           {table.getHeaderGroups().map(headerGroup => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map(header => (
-                <th key={header.id} className="text-left">
+                <th
+                  key={header.id}
+                  className={header.id === 'id' ? 'text-center' : 'text-left'}
+                >
                   {flexRender(
                     header.column.columnDef.header,
                     header.getContext(),
@@ -108,7 +117,12 @@ const ProjectTable = ({ projects }: { projects?: Project[] }) => {
           {table.getRowModel().rows.map(row => (
             <tr key={row.id}>
               {row.getVisibleCells().map(cell => (
-                <td key={cell.id}>
+                <td
+                  key={cell.id}
+                  className={
+                    cell?.column?.id === 'id' ? 'text-center' : 'text-left'
+                  }
+                >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}

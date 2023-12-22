@@ -8,13 +8,6 @@
       "etape": "En attente"
     },
     {
-      "id": 2,
-      "nom": " projet 2",
-      "description": "description 2",
-      "commentaire": " ceci est un commentaire 2 de test",
-      "etape": "En cours"
-    },
-    {
       "id": 3,
       "nom": " projet 3",
       "description": "description 3",

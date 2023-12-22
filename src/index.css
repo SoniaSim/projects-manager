@@ -6,11 +6,13 @@
 
 :root {
   --colors-text: rgba(255, 255, 255, 0.87);
+  --colors-text-secondary: #ffcbdd;
   --colors-border: #fef6e7;
   --colors-background: #242424;
   --colors-btn-background: #1a1a1a;
 
   --ui-text: var(--colors-text);
+  --ui-text-secondary: var(--colors-text-secondary);
   --ui-border: var(--colors-border);
   --ui-background: var(--colors-background);
   --ui-btn-background: var(--colors-btn-background);
@@ -63,7 +65,7 @@ input:focus, input:valid {
 }
 
 table *:not(input, svg, div) {
-  border: 1px solid white;
+  border: 1px solid var(--ui-text-secondary);
   padding: 8px;
 }
 
