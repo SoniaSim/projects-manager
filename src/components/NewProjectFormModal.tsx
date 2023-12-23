@@ -1,8 +1,9 @@
 import Modal from 'react-modal';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
-import { TextField, TextareaField } from './Fields';
+import { TextField, TextareaField, SelectField } from './Fields';
 import { useMutation, useQueryClient } from 'react-query';
 import { CREATE_PROJECT } from 'api/projects';
+import { AiFillCloseCircle } from 'react-icons/ai';
 
 Modal.setAppElement('#root');
 
@@ -10,6 +11,7 @@ type ModalComponentProps = {
   isOpen: boolean;
   onRequestClose: () => void;
   maxNumberId?: number;
+  projectSteps?: string[];
 };
 
 type Inputs = {
@@ -43,6 +45,7 @@ const NewProjectFormModal: React.FC<ModalComponentProps> = ({
   isOpen,
   onRequestClose,
   maxNumberId,
+  projectSteps,
 }) => {
   const methods = useForm<Inputs>();
   const queryClient = useQueryClient();
@@ -53,15 +56,25 @@ const NewProjectFormModal: React.FC<ModalComponentProps> = ({
     },
   });
 
-  const onSubmit: SubmitHandler<Inputs> = data => {
-    createProject({ ...data, id: ((maxNumberId && maxNumberId) || 0) + 1 });
+  const handCloseModal = () => {
     onRequestClose();
     methods.reset();
   };
 
+  const onSubmit: SubmitHandler<Inputs> = data => {
+    createProject({ ...data, id: ((maxNumberId && maxNumberId) || 0) + 1 });
+    handCloseModal();
+  };
+
   return (
     <Modal isOpen={isOpen} onRequestClose={onRequestClose} style={customStyles}>
-      <h2 className="text-2xl font-bold pb-8">Ajouter un nouveau projet</h2>
+      <div className="flex justify-between items-center pb-8">
+        <h2 className="text-2xl font-bold">Ajouter un nouveau projet</h2>
+        <AiFillCloseCircle
+          onClick={handCloseModal}
+          className="cursor-pointer"
+        />
+      </div>
       <FormProvider {...methods}>
         <form
           onSubmit={methods.handleSubmit(onSubmit)}
@@ -70,7 +83,11 @@ const NewProjectFormModal: React.FC<ModalComponentProps> = ({
           <TextField name="nom" label="Nom du projet" />
           <TextareaField name="description" label="Description du projet" />
           <TextareaField name="commentaire" label="Commentaire" />
-          <TextField name="etape" label="Étape" />
+          <SelectField
+            name="etape"
+            label="Étape"
+            options={projectSteps || []}
+          />
           <div className="flex justify-end">
             <button type="submit" className="w-32 bg-btn-background">
               Ajouter

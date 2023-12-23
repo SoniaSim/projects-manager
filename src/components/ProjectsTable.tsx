@@ -7,7 +7,7 @@ import {
 } from '@tanstack/react-table';
 import { useMutation, useQueryClient } from 'react-query';
 import { UPDATE_PROJECT, DELETE_PROJECT } from 'api/projects';
-import { EditableCell, DeleteCell, ShowDetailsCell } from './Cell';
+import { EditableCell, DeleteCell, ShowDetailsCell, StatusCell } from './Cell';
 
 const columnHelper = createColumnHelper<Project>();
 
@@ -35,7 +35,7 @@ const columns = [
   columnHelper.accessor(row => row.etape, {
     id: 'etape',
     header: 'Etape',
-    cell: info => <EditableCell {...info} />,
+    cell: info => <StatusCell {...info} />,
   }),
   columnHelper.accessor('showAction', {
     id: 'showAction',
@@ -71,8 +71,9 @@ const ProjectTable = ({ projects }: { projects?: Project[] }) => {
     },
   );
 
-  // TODO : add popover of steps project in table
-  // const projectSteps = new Set(projects?.map(({ etape }) => etape));
+  const projectSteps = [
+    ...new Set((projects || []).map(({ etape }: any) => etape)),
+  ];
 
   const table = useReactTable({
     data: projects || [],
@@ -88,6 +89,7 @@ const ProjectTable = ({ projects }: { projects?: Project[] }) => {
         deleteProject({
           projectId,
         }),
+      projectSteps,
     },
   });
 

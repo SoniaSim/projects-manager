@@ -16,9 +16,14 @@ const ProjectDetails = () => {
   const params = useParams();
   const projectId = Number(params?.projectId);
 
-  const { data: project } = useQuery<Project>(['project', projectId], () =>
-    GET_PROJECT(projectId),
+  const { data: project, isLoading } = useQuery<Project>(
+    ['project', projectId],
+    () => GET_PROJECT(projectId),
   );
+
+  if (isLoading) {
+    return;
+  }
 
   return (
     <div className="p-8 flex flex-col gap-4">

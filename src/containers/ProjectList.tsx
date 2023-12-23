@@ -71,6 +71,7 @@ const ProjectList = () => {
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
         maxNumberId={maxNumberId}
+        projectSteps={projectSteps}
       />
     </div>
   );

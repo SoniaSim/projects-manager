@@ -1,5 +1,5 @@
-import * as Popover from '@radix-ui/react-popover';
 import { useState } from 'react';
+import Select from './Select';
 
 const StepsFilter = ({
   projectSteps,
@@ -21,8 +21,10 @@ const StepsFilter = ({
   };
 
   return (
-    <Popover.Root open={isOpen} onOpenChange={setIsOpen}>
-      <Popover.Trigger asChild>
+    <Select
+      isOpen={isOpen}
+      setIsOpen={setIsOpen}
+      trigger={
         <button
           className="border-border bg-btn-background hover:text-text-secondary w-[160px]"
           aria-label="Filtrer par étape"
@@ -30,27 +32,20 @@ const StepsFilter = ({
         >
           Filtrer par étape
         </button>
-      </Popover.Trigger>
-      <Popover.Portal>
-        <Popover.Content
-          className="rounded-sm bg-btn-background flex flex-col w-[160px] text-left"
-          sideOffset={5}
+      }
+      content={(projectSteps || []).map((step: string, index: number) => (
+        <button
+          key={index}
+          className="border-none text-left hover:text-text-secondary"
+          onClick={() => {
+            handleSelectFilter(step);
+            setIsOpen(!isOpen);
+          }}
         >
-          {(projectSteps || []).map((step: string, index: number) => (
-            <button
-              key={index}
-              className="border-none text-left hover:text-text-secondary"
-              onClick={() => {
-                handleSelectFilter(step);
-                setIsOpen(!isOpen);
-              }}
-            >
-              {step}
-            </button>
-          ))}
-        </Popover.Content>
-      </Popover.Portal>
-    </Popover.Root>
+          {step}
+        </button>
+      ))}
+    />
   );
 };
 
