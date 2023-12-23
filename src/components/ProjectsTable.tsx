@@ -5,8 +5,6 @@ import {
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { useMutation, useQueryClient } from 'react-query';
-import { UPDATE_PROJECT, DELETE_PROJECT } from 'api/projects';
 import { EditableCell, DeleteCell, ShowDetailsCell, StatusCell } from './Cell';
 
 const columnHelper = createColumnHelper<Project>();
@@ -49,28 +47,15 @@ const columns = [
   }),
 ];
 
-const ProjectTable = ({ projects }: { projects?: Project[] }) => {
-  const queryClient = useQueryClient();
-
-  const { mutate: updateProject } = useMutation(
-    ({ projectId, infos }: { projectId: number; infos: Project }) =>
-      UPDATE_PROJECT(projectId, infos),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries('projects');
-      },
-    },
-  );
-
-  const { mutate: deleteProject } = useMutation(
-    ({ projectId }: { projectId: number }) => DELETE_PROJECT(projectId),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries('projects');
-      },
-    },
-  );
-
+const ProjectTable = ({
+  projects,
+  updateProject,
+  deleteProject,
+}: {
+  projects?: Project[];
+  updateProject: (data: any) => void;
+  deleteProject: (data: any) => void;
+}) => {
   const projectSteps = [
     ...new Set((projects || []).map(({ etape }: any) => etape)),
   ];

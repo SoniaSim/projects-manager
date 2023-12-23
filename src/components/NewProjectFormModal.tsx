@@ -1,8 +1,6 @@
 import Modal from 'react-modal';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 import { TextField, TextareaField, SelectField } from './Fields';
-import { useMutation, useQueryClient } from 'react-query';
-import { CREATE_PROJECT } from 'api/projects';
 import { AiFillCloseCircle } from 'react-icons/ai';
 
 Modal.setAppElement('#root');
@@ -12,9 +10,11 @@ type ModalComponentProps = {
   onRequestClose: () => void;
   maxNumberId?: number;
   projectSteps?: string[];
+  createProject: (data: Inputs) => void;
 };
 
 type Inputs = {
+  id: number;
   nom: string;
   description: string;
   etape: string;
@@ -46,15 +46,9 @@ const NewProjectFormModal: React.FC<ModalComponentProps> = ({
   onRequestClose,
   maxNumberId,
   projectSteps,
+  createProject,
 }) => {
   const methods = useForm<Inputs>();
-  const queryClient = useQueryClient();
-
-  const { mutate: createProject } = useMutation(CREATE_PROJECT, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('projects');
-    },
-  });
 
   const handCloseModal = () => {
     onRequestClose();

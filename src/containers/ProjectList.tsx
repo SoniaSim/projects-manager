@@ -1,19 +1,50 @@
-import { useQuery } from 'react-query';
-import { GET_PROJECTS } from 'api/projects';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import {
+  CREATE_PROJECT,
+  DELETE_PROJECT,
+  GET_PROJECTS,
+  UPDATE_PROJECT,
+} from 'api/projects';
 import ProjectTable from 'components/ProjectsTable';
 import { Project } from 'type/project';
 import { useState } from 'react';
 import NewProjectFormModal from 'components/NewProjectFormModal';
-import StepsFilter from 'src/components/StepsFilter';
+import StepsFilter from 'components/StepsFilter';
 import { AiOutlineClose } from 'react-icons/ai';
 
 const ProjectList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [stepsFilter, setStepFilter] = useState<string[]>([]);
+  const queryClient = useQueryClient();
 
   const { data: projects, isLoading } = useQuery<Project[]>(
     'projects',
     GET_PROJECTS,
+  );
+
+  const { mutate: createProject } = useMutation(CREATE_PROJECT, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('projects');
+    },
+  });
+
+  const { mutate: updateProject } = useMutation(
+    ({ projectId, infos }: { projectId: number; infos: Project }) =>
+      UPDATE_PROJECT(projectId, infos),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('projects');
+      },
+    },
+  );
+
+  const { mutate: deleteProject } = useMutation(
+    ({ projectId }: { projectId: number }) => DELETE_PROJECT(projectId),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('projects');
+      },
+    },
   );
 
   if (isLoading) {
@@ -65,6 +96,8 @@ const ProjectList = () => {
         projects={
           (filtredProjects || [])?.length > 0 ? filtredProjects : projects
         }
+        updateProject={updateProject}
+        deleteProject={deleteProject}
       />
 
       <NewProjectFormModal
@@ -72,6 +105,7 @@ const ProjectList = () => {
         onRequestClose={() => setIsModalOpen(false)}
         maxNumberId={maxNumberId}
         projectSteps={projectSteps}
+        createProject={createProject}
       />
     </div>
   );
